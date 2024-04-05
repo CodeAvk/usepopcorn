@@ -205,6 +205,10 @@ function Main() {
   );
 }
 
+function ChildCop() {
+  retun(<div>Hi</div>);
+}
+
 function WatchedMovie({ movie }) {
   return (
     <li key={movie.imdbID}>
