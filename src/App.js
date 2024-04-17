@@ -141,7 +141,6 @@ function ListBox({ children }) {
     </div>
   );
 }
-
 function WatchedBox() {
   const [isOpen2, setIsOpen2] = useState(true);
   const [watched, setWatched] = useState(tempWatchedData);
@@ -162,6 +161,7 @@ function WatchedBox() {
     </div>
   );
 }
+
 function WatchedSummary({ watched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
