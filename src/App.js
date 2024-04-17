@@ -50,28 +50,36 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 export default function App() {
+  const [movies, setMovies] = useState(tempMovieData);
   return (
     <>
-      <NavBar></NavBar>
-      <Main></Main>
+      <NavBar>
+        <SearchBar></SearchBar>
+        <NumResults movies={movies}></NumResults>
+      </NavBar>
+      <Main>
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
+        <WatchedBox></WatchedBox>
+      </Main>
     </>
   );
 }
 
-function NavBar() {
+function NavBar({ children }) {
   return (
     <nav className="nav-bar">
       <Logo></Logo>
-      <SearchBar></SearchBar>
-      <NumResults></NumResults>
+      {children}
     </nav>
   );
 }
 
-function NumResults() {
+function NumResults({ movies }) {
   return (
     <p className="num-results">
-      Found <strong>X</strong> results
+      Found <strong>{movies.length}</strong> results
     </p>
   );
 }
@@ -95,9 +103,7 @@ function SearchBar() {
     />
   );
 }
-function MovieList() {
-  const [movies, setMovies] = useState(tempMovieData);
-
+function MovieList({ movies }) {
   return (
     <ul className="list" style={{ overflow: "hidden" }}>
       {movies?.map((movie) => (
@@ -121,7 +127,7 @@ function Movie({ movie }) {
     </li>
   );
 }
-function ListBox() {
+function ListBox({ children }) {
   const [isOpen1, setIsOpen1] = useState(true);
   return (
     <div className="box" style={{ overflow: "hidden" }}>
@@ -131,7 +137,7 @@ function ListBox() {
       >
         {isOpen1 ? "–" : "+"}
       </button>
-      {isOpen1 && <MovieList />}
+      {isOpen1 && children}
     </div>
   );
 }
@@ -193,20 +199,11 @@ function WatchedMoviesList({ watched }) {
     </ul>
   );
 }
-function Main() {
+function Main({ children }) {
   const [movies, setMovies] = useState(tempMovieData);
   const [isOpen1, setIsOpen1] = useState(true);
 
-  return (
-    <main className="main">
-      <ListBox></ListBox>
-      <WatchedBox></WatchedBox>
-    </main>
-  );
-}
-
-function ChildCop() {
-  retun(<div>Hi</div>);
+  return <main className="main">{children}</main>;
 }
 
 function WatchedMovie({ movie }) {
