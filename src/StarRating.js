@@ -12,7 +12,7 @@ export default function StarRating() {
           <span>5{i + 1}</span>
         ))}
       </div>
-      <p>10</p>
+      <p>9</p>
     </div>
   );
 }
